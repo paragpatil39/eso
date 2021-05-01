@@ -1,2 +1,6 @@
 
 Task 1:
+- create a simple energy system
+- add 1 source, 1 Sink , 1 difference
+- import these inputs as a .csv file
+- store results as .csv file in the output folder
