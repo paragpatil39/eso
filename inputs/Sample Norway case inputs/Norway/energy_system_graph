@@ -1,0 +1,210 @@
+digraph {
+	subgraph cluster_1 {
+		color=black
+		label=Legends
+		Bus [color=lightgrey fixedsize=shape fontsize=10 height=0.3 shape=rectangle style=filled width=4.1]
+		Sink [fontsize=10 shape=trapezium]
+		Source [fontsize=10 shape=invtrapezium]
+		"Transforme
+r" [fontsize=10 shape=rectangle]
+		Storage [fontsize=10 shape=rectangle style=rounded]
+	}
+	"ESS Li-Ion bus" [color=lightgrey fixedsize=shape fontsize=10 height=0.3 shape=rectangle style=filled width=4.1]
+	Electricity [color=lightgrey fixedsize=shape fontsize=10 height=0.3 shape=rectangle style=filled width=4.1]
+	"Electricity (DSO)" [color=lightgrey fixedsize=shape fontsize=10 height=0.3 shape=rectangle style=filled width=4.1]
+	"PV plant (mono)" [color=lightgrey fixedsize=shape fontsize=10 height=0.3 shape=rectangle style=filled width=4.1]
+	"Electricity (DSO)_pdp" [color=lightgrey fixedsize=shape fontsize=10 height=0.3 shape=rectangle style=filled width=4.1]
+	"solar_inve
+rter_01" [fontsize=10 shape=rectangle]
+	"storage_ch
+arge_contr
+oller_in" [fontsize=10 shape=rectangle]
+	"storage_ch
+arge_contr
+oller_out" [fontsize=10 shape=rectangle]
+	"transforme
+r_station_
+in" [fontsize=10 shape=rectangle]
+	"transforme
+r_station_
+out" [fontsize=10 shape=rectangle]
+	"DSO_consum
+ption_peri
+od_1" [fontsize=10 shape=rectangle]
+	"DSO_consum
+ption_peri
+od_2" [fontsize=10 shape=rectangle]
+	"DSO_consum
+ption_peri
+od_3" [fontsize=10 shape=rectangle]
+	"DSO_consum
+ption_peri
+od_4" [fontsize=10 shape=rectangle]
+	"DSO_consum
+ption_peri
+od_5" [fontsize=10 shape=rectangle]
+	"DSO_consum
+ption_peri
+od_6" [fontsize=10 shape=rectangle]
+	"DSO_consum
+ption_peri
+od_7" [fontsize=10 shape=rectangle]
+	"DSO_consum
+ption_peri
+od_8" [fontsize=10 shape=rectangle]
+	"DSO_consum
+ption_peri
+od_9" [fontsize=10 shape=rectangle]
+	"DSO_consum
+ption_peri
+od_10" [fontsize=10 shape=rectangle]
+	"DSO_consum
+ption_peri
+od_11" [fontsize=10 shape=rectangle]
+	"DSO_consum
+ption_peri
+od_12" [fontsize=10 shape=rectangle]
+	"ESS Li-Ion" [fontsize=10 shape=rectangle style=rounded]
+	pv_plant [fontsize=10 shape=invtrapezium]
+	"DSO_consum
+ption_sour
+ce" [fontsize=10 shape=invtrapezium]
+	demand_01 [fontsize=10 shape=trapezium]
+	demand_02 [fontsize=10 shape=trapezium]
+	"ESS Li-Ion
+ bus_exces
+s_sink" [fontsize=10 shape=trapezium]
+	"Electricit
+y_excess_s
+ink" [fontsize=10 shape=trapezium]
+	"Electricit
+y (DSO)_ex
+cess_sink" [fontsize=10 shape=trapezium]
+	"PV plant (
+mono)_exce
+ss_sink" [fontsize=10 shape=trapezium]
+	"DSO_feedin
+_sink_sink" [fontsize=10 shape=trapezium]
+	"storage_ch
+arge_contr
+oller_in" -> "ESS Li-Ion bus"
+	"ESS Li-Ion" -> "ESS Li-Ion bus"
+	"ESS Li-Ion bus" -> "storage_ch
+arge_contr
+oller_out"
+	"ESS Li-Ion bus" -> "ESS Li-Ion"
+	"ESS Li-Ion bus" -> "ESS Li-Ion
+ bus_exces
+s_sink"
+	"storage_ch
+arge_contr
+oller_out" -> Electricity
+	"solar_inve
+rter_01" -> Electricity
+	"transforme
+r_station_
+in" -> Electricity
+	Electricity -> "storage_ch
+arge_contr
+oller_in"
+	Electricity -> "transforme
+r_station_
+out"
+	Electricity -> demand_01
+	Electricity -> demand_02
+	Electricity -> "Electricit
+y_excess_s
+ink"
+	"DSO_consum
+ption_peri
+od_6" -> "Electricity (DSO)"
+	"DSO_consum
+ption_peri
+od_7" -> "Electricity (DSO)"
+	"DSO_consum
+ption_peri
+od_8" -> "Electricity (DSO)"
+	"DSO_consum
+ption_peri
+od_10" -> "Electricity (DSO)"
+	"transforme
+r_station_
+out" -> "Electricity (DSO)"
+	"DSO_consum
+ption_peri
+od_1" -> "Electricity (DSO)"
+	"DSO_consum
+ption_peri
+od_2" -> "Electricity (DSO)"
+	"DSO_consum
+ption_peri
+od_12" -> "Electricity (DSO)"
+	"DSO_consum
+ption_peri
+od_5" -> "Electricity (DSO)"
+	"DSO_consum
+ption_peri
+od_11" -> "Electricity (DSO)"
+	"DSO_consum
+ption_peri
+od_3" -> "Electricity (DSO)"
+	"DSO_consum
+ption_peri
+od_4" -> "Electricity (DSO)"
+	"DSO_consum
+ption_peri
+od_9" -> "Electricity (DSO)"
+	"Electricity (DSO)" -> "transforme
+r_station_
+in"
+	"Electricity (DSO)" -> "Electricit
+y (DSO)_ex
+cess_sink"
+	"Electricity (DSO)" -> "DSO_feedin
+_sink_sink"
+	pv_plant -> "PV plant (mono)"
+	"PV plant (mono)" -> "solar_inve
+rter_01"
+	"PV plant (mono)" -> "PV plant (
+mono)_exce
+ss_sink"
+	"DSO_consum
+ption_sour
+ce" -> "Electricity (DSO)_pdp"
+	"Electricity (DSO)_pdp" -> "DSO_consum
+ption_peri
+od_1"
+	"Electricity (DSO)_pdp" -> "DSO_consum
+ption_peri
+od_2"
+	"Electricity (DSO)_pdp" -> "DSO_consum
+ption_peri
+od_3"
+	"Electricity (DSO)_pdp" -> "DSO_consum
+ption_peri
+od_4"
+	"Electricity (DSO)_pdp" -> "DSO_consum
+ption_peri
+od_5"
+	"Electricity (DSO)_pdp" -> "DSO_consum
+ption_peri
+od_6"
+	"Electricity (DSO)_pdp" -> "DSO_consum
+ption_peri
+od_7"
+	"Electricity (DSO)_pdp" -> "DSO_consum
+ption_peri
+od_8"
+	"Electricity (DSO)_pdp" -> "DSO_consum
+ption_peri
+od_9"
+	"Electricity (DSO)_pdp" -> "DSO_consum
+ption_peri
+od_10"
+	"Electricity (DSO)_pdp" -> "DSO_consum
+ption_peri
+od_11"
+	"Electricity (DSO)_pdp" -> "DSO_consum
+ption_peri
+od_12"
+}

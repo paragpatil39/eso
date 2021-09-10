@@ -1,0 +1,8 @@
+,unit
+age_installed,year
+specific_costs,currency/kW
+label,str
+lifetime,year
+specific_costs_om,currency/kW/year
+development_costs,currency
+dispatch_price,currency/kWh

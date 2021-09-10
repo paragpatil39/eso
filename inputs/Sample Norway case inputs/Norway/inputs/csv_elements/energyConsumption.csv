@@ -1,0 +1,6 @@
+,unit,demand_01,demand_02
+file_name,str,demand_harbor.csv,demand_remaining.csv
+type_oemof,str,sink,sink
+energyVector,str,Electricity,Electricity
+inflow_direction,str,Electricity,Electricity
+unit,str,kW,kW

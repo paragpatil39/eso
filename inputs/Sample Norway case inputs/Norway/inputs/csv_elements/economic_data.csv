@@ -1,0 +1,5 @@
+,unit,economic_data
+currency,str,NOK
+discount_factor,factor,0.06
+project_duration,year,30
+tax,factor,0
