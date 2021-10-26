@@ -53,7 +53,7 @@ solver = "cbc"
 # Create an energy system and optimize the dispatch at least costs.
 # ####################### initialize and provide data #####################
 year=2021
-datetimeindex = pd.date_range("1/1/2021", periods=24 * 10, freq="H")
+datetimeindex = pd.date_range("1/1/2021", periods=24 * 365, freq="H")
 energysystem = EnergySystem(timeindex=datetimeindex)
 filename = os.path.join(os.getcwd(), "storage_investment_ambon1.csv")
 data = pd.read_csv(filename, sep=",")
@@ -165,29 +165,30 @@ node_results_flows = node_results_bel["sequences"]
 
 node_results_flows.to_csv("results.csv")
 print(node_results_flows.sum())
+node_results_flows.sum().to_csv("optimal_results.csv")
 
 demand_el = node_results_flows.iloc[:,0].sum()
 print("electricity demand: {:.3f}".format(demand_el))
 excess_el = node_results_flows.iloc[:,1].sum()
 print("{:04.1f} % excess generation: {:.3f}".format(
             100 * excess_el / demand_el, excess_el))
-coal_generation = node_results_flows.iloc[:,2].sum()
+coal_generation = node_results_flows.iloc[:,3].sum()
 print("{:04.1f} % coal plant coverage: {:.3f}".format(
             100 * coal_generation / demand_el, coal_generation))
-gas_generation = node_results_flows.iloc[:,3].sum()
+gas_generation = node_results_flows.iloc[:,4].sum()
 print("{:04.1f} % gas plant coverage: {:.3f}".format(
             100 * gas_generation / demand_el, gas_generation))
-oil_generation = node_results_flows.iloc[:,4].sum()
+oil_generation = node_results_flows.iloc[:,5].sum()
 print("{:04.1f} % oil plant coverage: {:.3f}".format(
             100 * oil_generation / demand_el, oil_generation))
-pv_generation = node_results_flows.iloc[:,5].sum()
+pv_generation = node_results_flows.iloc[:,6].sum()
 print("{:04.1f} % pv plant coverage: {:.3f}".format(
             100 * pv_generation / demand_el, pv_generation))
-shortage = node_results_flows.iloc[:,6].sum()
+shortage = node_results_flows.iloc[:,7].sum()
 print("{:04.1f} % shortage : {:.3f}".format(
             100 * shortage / demand_el, shortage))
-storage_flow = node_results_flows.iloc[:,7].sum()
-print("{:04.1f} % storage : {:.3f}".format(
+storage_flow = node_results_flows.iloc[:,8].sum()
+print("{:04.1f} % storage coverage : {:.3f}".format(
             100 * storage_flow / demand_el, storage_flow))
 
 
