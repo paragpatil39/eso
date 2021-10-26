@@ -42,6 +42,7 @@ from oemof.solph import (
     Model,
     EnergySystem,
     views,
+    components
 )
 
 import matplotlib.pyplot as plt
@@ -51,8 +52,8 @@ solver = "cbc"
 
 # Create an energy system and optimize the dispatch at least costs.
 # ####################### initialize and provide data #####################
-
-datetimeindex = pd.date_range("1/1/2022", periods=24 * 365, freq="H")
+year=2021
+datetimeindex = pd.date_range("1/1/2021", periods=24 * 10, freq="H")
 energysystem = EnergySystem(timeindex=datetimeindex)
 filename = os.path.join(os.getcwd(), "storage_investment_ambon1.csv")
 data = pd.read_csv(filename, sep=",")
@@ -118,6 +119,22 @@ energysystem.add(
     )
 )
 
+# create storage object representing a battery
+storage = components.GenericStorage(
+    label="storage",
+    inputs={bel: Flow(variable_costs=0.0001)},
+    outputs={bel: Flow()},
+    nominal_storage_capacity=3000,
+    loss_rate=0.00,
+    initial_storage_level=0,
+    invest_relation_input_capacity=1 / 6,
+    invest_relation_output_capacity=1 / 6,
+    inflow_conversion_factor=0.96,
+    outflow_conversion_factor=0.96,
+)
+
+energysystem.add(storage)
+
 # ################################ optimization ###########################
 
 # create optimization model based on energy_system
@@ -147,6 +164,7 @@ node_results_bel = views.node(optimization_model.results(), "bel")
 node_results_flows = node_results_bel["sequences"]
 
 node_results_flows.to_csv("results.csv")
+print(node_results_flows.sum())
 
 demand_el = node_results_flows.iloc[:,0].sum()
 print("electricity demand: {:.3f}".format(demand_el))
@@ -168,6 +186,9 @@ print("{:04.1f} % pv plant coverage: {:.3f}".format(
 shortage = node_results_flows.iloc[:,6].sum()
 print("{:04.1f} % shortage : {:.3f}".format(
             100 * shortage / demand_el, shortage))
+storage_flow = node_results_flows.iloc[:,7].sum()
+print("{:04.1f} % storage : {:.3f}".format(
+            100 * storage_flow / demand_el, storage_flow))
 
 
 fig, ax = plt.subplots(figsize=(10, 5))
